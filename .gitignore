@@ -1,0 +1,169 @@
+# ==========================================
+# 1. ALL SENSITIVE & PRIVATE FILES (WILDCARD MATCHING)
+# ==========================================
+# Catches .env, .env.local, .env.development.local, backend/.env, env.js, etc.
+*.env*
+*.env.*
+*env*
+!*.env.example
+!*.env.template
+
+# Credentials, Keys & Certificates anywhere in the tree
+**/*.pem
+**/*.key
+**/*.cert
+**/*.crt
+**/*.pfx
+**/*.p12
+**/credentials.json
+**/client_secret*.json
+**/secrets.json
+**/secrets.*
+
+# Databases, Local Storage & Vector Indexes (e.g., ChromaDB, FAISS)
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/uploads/
+**/storage/
+**/.chroma/
+**/.faiss/
+**/vector_store/
+
+# ==========================================
+# 2. ALL DEPENDENCY DIRECTORIES
+# ==========================================
+# Catches node_modules at any directory depth (root, /backend, /frontend)
+**/node_modules/
+
+# All log files across package managers
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# 3. ALL BUILD, DIST & CACHE DIRECTORIES
+# ==========================================
+# Build outputs from Vue, Express, TypeScript, Vite, etc.
+**/dist/
+**/dist-ssr/
+**/build/
+**/out/
+**/.cache/
+**/.vite/
+
+# ==========================================
+# 4. OS & IDE CONFIGURATIONS
+# ==========================================
+# VS Code, JetBrains, WebStorm across all nested folders
+**/.vscode/
+**/.idea/
+**/*.code-workspace
+**/*.iws
+**/*.iml
+
+# macOS & Windows System Files
+**/.DS_Store
+**/Thumbs.db
+**/desktop.ini
+
+# ==========================================
+# 5. TEMPORARY & RUNTIME FILES
+# ==========================================
+**/tmp/
+**/temp/
+**/*.pid
+**/*.seed
+
+# ==========================================
+# 1. ENVIRONMENT & SENSITIVE KEYS
+# ==========================================
+# Matches backend/.env and any variants (e.g., .env.local, env.js)
+.env
+.env*
+backend/*.env*
+backend/*env*
+*.env*
+*env*
+!*.env.example
+
+# Secrets, API Keys & Certificates
+**/*.pem
+**/*.key
+**/credentials.json
+**/secrets.json
+
+# ==========================================
+# 2. DEPENDENCIES
+# ==========================================
+backend/node_modules/
+frontend/node_modules/
+node_modules/
+
+# Package logs
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+
+# ==========================================
+# 3. BUILD OUTPUTS & LOCAL CACHE
+# ==========================================
+frontend/dist/
+frontend/dist-ssr/
+backend/dist/
+backend/build/
+**/.cache/
+**/.vite/
+
+# ==========================================
+# 4. OS & IDE TEMP FILES
+# ==========================================
+**/.vscode/
+**/.idea/
+**/.DS_Store
+**/Thumbs.db
+
+
+
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+*.tsbuildinfo
+
+.eslintcache
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Vitest
+__screenshots__/
+
+# Vite
+*.timestamp-*-*.mjs
