@@ -14,24 +14,22 @@ const allowedOrigins = [
   'http://localhost:5173'
 ].filter(Boolean);
 
-console.log('Allowed origins:', allowedOrigins);
-
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) {
-      return callback(null, true);
-    }
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
 
-    console.log('Blocked origin:', origin);
     return callback(new Error('Not allowed by CORS'));
   },
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Parse incoming JSON requests
 app.use(express.json());
