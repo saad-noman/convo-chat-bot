@@ -9,7 +9,11 @@ const chatRoutes = require('./routes/chatRoutes');
 const app = express();
 
 // CORS for Vue frontend's access to the backend
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 // Parse incoming JSON requests
 app.use(express.json());
