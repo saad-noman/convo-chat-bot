@@ -17,10 +17,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no Origin header (health checks, server-to-server)
-    if (!origin) {
-      return callback(null, true);
-    }
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
@@ -28,21 +25,14 @@ const corsOptions = {
 
     return callback(new Error('Not allowed by CORS'));
   },
-
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-
-  allowedHeaders: [
-    'Content-Type',
-    'Authorization'
-  ],
-
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 204
 };
-// CORS must be registered before routes
+
 app.use(cors(corsOptions));
-// Handle preflight requests
-app.options(/.*/, cors(corsOptions));
+app.options('/api/chat', cors(corsOptions));
 
 // Parse incoming JSON requests
 app.use(express.json());
