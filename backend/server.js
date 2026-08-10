@@ -12,15 +12,18 @@ const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   'http://localhost:5173'
-];
+].filter(Boolean);
 
 app.use(cors({
   origin: function (origin, callback) {
+    console.log('Incoming origin:', origin);
+    console.log('Allowed origins:', allowedOrigins);
+
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
   },
   methods: ['GET', 'POST'],
   credentials: true
