@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
-const chatRoutes = require('./routes/chatRoutes');
-
 dotenv.config();
+
+const chatRoutes = require('./routes/chatRoutes');
 
 const app = express();
 
