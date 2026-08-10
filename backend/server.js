@@ -9,6 +9,7 @@ const chatRoutes = require('./routes/chatRoutes');
 const app = express();
 
 // CORS for Vue frontend's access to the backend
+// Allowed origins
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   'http://localhost:5173'
@@ -16,7 +17,10 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
+    // Allow requests with no Origin header (health checks, server-to-server)
+    if (!origin) {
+      return callback(null, true);
+    }
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
@@ -24,12 +28,21 @@ const corsOptions = {
 
     return callback(new Error('Not allowed by CORS'));
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true,
-};
 
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization'
+  ],
+
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+// CORS must be registered before routes
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+// Handle preflight requests
+app.options(/.*/, cors(corsOptions));
 
 // Parse incoming JSON requests
 app.use(express.json());
