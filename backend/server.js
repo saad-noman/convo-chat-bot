@@ -12,27 +12,26 @@ const app = express();
 // Allowed origins
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  'http://localhost:5173'
-].filter(Boolean);
+  'http://localhost:5173',
+];
 
-const corsOptions = {
-  origin: function (origin, callback) {
+app.use(cors({
+  origin(origin, callback) {
+    // Allow non-browser requests
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
 
-    return callback(new Error('Not allowed by CORS'));
+    return callback(new Error(`CORS blocked: ${origin}`));
   },
+  credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 204
-};
+}));
 
-app.use(cors(corsOptions));
-app.options('/api/chat', cors(corsOptions));
+app.options('*', cors());
 
 // Parse incoming JSON requests
 app.use(express.json());
