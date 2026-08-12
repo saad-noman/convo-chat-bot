@@ -7,7 +7,7 @@ const api = axios.create({
 
 // Send user message to backend
 export const sendMessage = (message) => {
-  return api.post('/chat', {
+  return api.post('/api/chat', {
     message
   });
 };
