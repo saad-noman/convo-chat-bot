@@ -13,9 +13,9 @@ const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   'http://localhost:5173',
-];
+].filter(Boolean);
 
-app.use(cors({
+const corsOptions = {
   origin(origin, callback) {
     // Allow non-browser requests
     if (!origin) return callback(null, true);
@@ -29,9 +29,9 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+};
 
-app.options('*', cors());
+app.use(cors(corsOptions));
 
 // Parse incoming JSON requests
 app.use(express.json());
